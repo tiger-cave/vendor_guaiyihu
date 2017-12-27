@@ -17,7 +17,8 @@ SOONG_CONFIG_guaiyihuGlobalVars += \
     disable_postrender_cleanup \
     target_init_vendor_lib \
     target_process_sdk_version_override \
-    uses_camera_parameter_lib
+    uses_camera_parameter_lib \
+    uses_qcom_bsp_legacy
 
 # Soong bool variables
 SOONG_CONFIG_guaiyihuGlobalVars_disable_postrender_cleanup := $(TARGET_DISABLE_POSTRENDER_CLEANUP)
@@ -32,3 +33,4 @@ SOONG_CONFIG_guaiyihuGlobalVars_additional_gralloc_10_usage_bits := $(TARGET_ADD
 SOONG_CONFIG_guaiyihuGlobalVars_target_init_vendor_lib := $(TARGET_INIT_VENDOR_LIB)
 SOONG_CONFIG_guaiyihuGlobalVars_target_process_sdk_version_override := $(TARGET_PROCESS_SDK_VERSION_OVERRIDE)
 SOONG_CONFIG_guaiyihuGlobalVars_uses_camera_parameter_lib := $(TARGET_SPECIFIC_CAMERA_PARAMETER_LIBRARY)
+SOONG_CONFIG_guaiyihuGlobalVars_uses_qcom_bsp_legacy := $(TARGET_USES_QCOM_BSP_LEGACY)
