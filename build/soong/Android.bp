@@ -118,3 +118,19 @@ stagefright_qcom_legacy {
         },
     },
 }
+
+bootstrap_go_package {
+    name: "soong-guaiyihu-generator",
+    pkgPath: "guaiyihu/soong/generator",
+    deps: [
+        "blueprint",
+        "blueprint-pathtools",
+        "soong",
+        "soong-android",
+        "soong-shared",
+    ],
+    srcs: [
+        "generator/generator.go",
+    ],
+    pluginFor: ["soong_build"],
+}
