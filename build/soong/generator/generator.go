@@ -121,9 +121,8 @@ func (g *Module) DepsMutator(ctx android.BottomUpMutatorContext) {
 	android.ExtractSourcesDeps(ctx, g.properties.Tool_files)
 	if g, ok := ctx.Module().(*Module); ok {
 		if len(g.properties.Tools) > 0 {
-			ctx.AddFarVariationDependencies([]blueprint.Variation{
-				{"arch", ctx.Config().BuildOsVariant},
-			}, hostToolDepTag, g.properties.Tools...)
+			ctx.AddFarVariationDependencies(ctx.Config().BuildOSTarget.Variations(),
+				hostToolDepTag, g.properties.Tools...)
 		}
 	}
 }
@@ -213,10 +212,13 @@ func (g *Module) GenerateAndroidBuildActions(ctx android.ModuleContext) {
 	depRoot := String(g.properties.Dep_root)
 	if depRoot == "" {
 		depRoot = ctx.ModuleDir()
+	} else {
+		depRoot = guaiyihuExpandVariables(ctx, depRoot)
 	}
 
 	// Glob dep_files property
 	for _, dep_file := range g.properties.Dep_files {
+		dep_file = guaiyihuExpandVariables(ctx, dep_file)
 		globPath := filepath.Join(depRoot, dep_file)
 		paths, err := ctx.GlobWithDeps(globPath, nil)
 		if err != nil {
@@ -228,7 +230,7 @@ func (g *Module) GenerateAndroidBuildActions(ctx android.ModuleContext) {
 		}
 	}
 
-	cmd := String(g.properties.Cmd)
+	cmd := guaiyihuExpandVariables(ctx, String(g.properties.Cmd))
 
 	rawCommand, err := android.Expand(cmd, func(name string) (string, error) {
 		switch name {
