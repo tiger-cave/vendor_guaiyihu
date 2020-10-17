@@ -35,6 +35,23 @@ gralloc_10_usage_bits {
 }
 
 soong_config_module_type {
+    name: "has_memfd_backport",
+    module_type: "cc_defaults",
+    config_namespace: "guaiyihuGlobalVars",
+    bool_variables: ["has_memfd_backport"],
+    properties: ["cppflags"],
+}
+
+has_memfd_backport {
+    name: "has_memfd_backport_defaults",
+    soong_config_variables: {
+        has_memfd_backport: {
+            cppflags: ["-DHAS_MEMFD_BACKPORT"],
+        },
+    },
+}
+
+soong_config_module_type {
     name: "vendor_init",
     module_type: "cc_defaults",
     config_namespace: "guaiyihuGlobalVars",
