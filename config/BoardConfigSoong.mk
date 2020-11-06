@@ -14,7 +14,11 @@ $(foreach v,$(EXPORT_TO_SOONG),$(eval $(call addVar,$(v))))
 SOONG_CONFIG_NAMESPACES += guaiyihuGlobalVars
 SOONG_CONFIG_guaiyihuGlobalVars += \
     additional_gralloc_10_usage_bits \
+    disable_postrender_cleanup \
     target_process_sdk_version_override
+
+# Soong bool variables
+SOONG_CONFIG_guaiyihuGlobalVars_disable_postrender_cleanup := $(TARGET_DISABLE_POSTRENDER_CLEANUP)
 
 # Set default values
 TARGET_ADDITIONAL_GRALLOC_10_USAGE_BITS ?= 0
